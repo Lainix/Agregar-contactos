@@ -16,14 +16,21 @@ var count = 0;
 // }
 
 function getContactData () {
-  var $name = $('#contact-name');
+  var name = $('#contact-name').val();
   var $phone = $('#contact-phone');
-  addContacDate($name.val(), $phone.val());
-  $name.val('');
+  addContacDate(name, $phone.val());
+  // addContacDate($name.val(), $phone.val());
+  // existen 2 maneras para limpiar el input
+  // limpiar el input
+  // $name.val('');
   $phone.val('');
-//  $('#contact-name').val('');
-//   $('#contact-phone').val('');
+
+// limpiar input
+$('#contact-name').val('');
+// $('#contact-phone').val('');
 };
+
+
 
 // crear plantilla- contatenamos los elementos del template
 var template = '<div class="row">'+
@@ -32,7 +39,7 @@ var template = '<div class="row">'+
                       '<div class="card-content orange lighten-3">'+
                         '<h3>__name__</h3>'+
                         '<span>__phone__</span>'+
-                        '<a class="waves-effect waves-light btn right">'+
+                        '<a class="waves-effect waves-light btn right" onClick="deleteContact()">'+
                           '<i class="material-icons">delete</i>'+
                         '</a>'+
                       '</div>'+
@@ -56,6 +63,18 @@ function addContacDate (name, phone){
   swal("Yei!", "contacto agregado!", "success");
 }
 
+// borrar el template
+function deleteContact(){
+  // para modificar el contador restarele al contador  , decrementar el contador
+  count--;
+  var item = $(event.currentTarget);
+  var card = item.parent();
+  var colCard = card.parent();
+  var rowCard = colCard.parent();
+  rowCard.remove();
+
+  $('h5').html('Total contactos:' + count);
+}
 
 
 // para que lea e inicialice todo
